@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom'
 import './App.css';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import WrapMap from './components/Truck/WrapMap';
 
 function App() {
+
+  const [loggedInTest, setLoggedInTest] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/login">
+            <Login
+              loggedInTest={loggedInTest}
+              setLoggedInTest={setLoggedInTest}
+            />
+          </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+          {/* <Route exact path="/"> */}
+          {/* <FoodTruck /> */}
+          {/* <WrapMap /> */}
+          <Route
+            exact
+            path="/"
+            render={() =>
+              loggedInTest ? <WrapMap /> : <Redirect to="/login" />
+            }
+          />
+          {/* </Route> */}
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

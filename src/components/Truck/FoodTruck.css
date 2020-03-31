@@ -1,0 +1,9 @@
+.info-window {
+  width: 250px;
+  height: 155px;
+}
+
+.food-genre {
+  max-width: 300px;
+  text-align: center;
+}
